@@ -1,0 +1,4 @@
+{:source-paths ["src/extension"]
+ :builds {:extension {:target :chrome-extension
+                      :manifest-file "manifest.edn"
+                      :extension-dir "out/extension"}}}
