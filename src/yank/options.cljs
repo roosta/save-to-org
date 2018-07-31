@@ -1,4 +1,4 @@
-(ns yank.options.core
+(ns yank.options
   (:require [goog.events :as events]
             [goog.object :as gobj]
             [shared.options :refer [defaults sync runtime restore-options save-options]]
@@ -81,7 +81,7 @@
   (let [runtime ^js/browser (gobj/get js/browser "runtime")]
     (.reload runtime)))
 
-(defn init!
+(defn init
   []
   (add-watch options :input-sync input-sync)
   (restore-options options)

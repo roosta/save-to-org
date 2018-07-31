@@ -1,4 +1,4 @@
-(ns yank.content-script.core
+(ns yank.content-script
   (:require [goog.object :as gobj]
             [shared.options :refer [defaults fetch-options on-storage-change]]
             [js.mousetrap]
@@ -26,7 +26,7 @@
       (.unbind js/Mousetrap old-keybind)
       (.bind js/Mousetrap new-keybind send-message))))
 
-(defn init!
+(defn init
   []
   (.bind js/Mousetrap (-> defaults :keybind :composed) send-message)
   (fetch-options options)

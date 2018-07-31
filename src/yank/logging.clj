@@ -1,4 +1,4 @@
-(ns shared.logging)
+(ns yank.logging)
 
 (defmacro log [& args]
   `(.log js/console ~@args))

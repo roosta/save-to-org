@@ -1,4 +1,4 @@
-(ns yank.background.core
+(ns yank.background
   (:require-macros [shared.logging :as d])
   (:require [goog.object :as gobj]
             [shared.options :refer [fetch-options defaults on-storage-change]]
@@ -82,7 +82,7 @@
   []
   (.reload runtime))
 
-(defn init!
+(defn init
   []
   (create-context-menu)
   (fetch-options options)

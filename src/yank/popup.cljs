@@ -1,4 +1,4 @@
-(ns yank.popup.core
+(ns yank.popup
   (:require-macros [shared.logging :as d])
   (:require [shared.options :refer [defaults sync runtime restore-options save-options]]
             [goog.object :as gobj]
@@ -25,7 +25,7 @@
 (defn fig-reload
   [])
 
-(defn init!
+(defn init
   []
   (add-watch options :input-sync input-sync)
   (restore-options options)

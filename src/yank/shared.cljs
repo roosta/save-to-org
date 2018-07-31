@@ -1,4 +1,4 @@
-(ns shared.options
+(ns yank.shared
   (:require-macros [shared.logging :as d])
   (:require [goog.object :as gobj]
             [clojure.walk :as w]))

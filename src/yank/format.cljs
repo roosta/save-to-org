@@ -1,4 +1,4 @@
-(ns yank.background.format
+(ns yank.format
   (:require [clojure.string :as str]))
 
 (defmulti as
