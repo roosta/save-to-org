@@ -1,7 +1,7 @@
 (ns yank.background
-  (:require-macros [shared.logging :as d])
+  (:require-macros [yank.logging :as d])
   (:require [goog.object :as gobj]
-            [shared.options :refer [fetch-options defaults on-storage-change]]
+            [yank.shared :refer [fetch-options defaults on-storage-change]]
             [yank.background.format :as format]))
 
 ;; for extern inference. Better warnings

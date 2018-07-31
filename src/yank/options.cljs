@@ -1,10 +1,10 @@
 (ns yank.options
   (:require [goog.events :as events]
             [goog.object :as gobj]
-            [shared.options :refer [defaults sync runtime restore-options save-options]]
+            [yank.shared :refer [defaults sync runtime restore-options save-options]]
             [clojure.string :as string]
             [goog.dom :as dom])
-  (:require-macros [shared.logging :as d]))
+  (:require-macros [yank.logging :as d]))
 
 ;; for extern inference, better warnings
 (set! *warn-on-infer* true)

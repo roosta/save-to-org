@@ -1,6 +1,6 @@
 (ns yank.popup
-  (:require-macros [shared.logging :as d])
-  (:require [shared.options :refer [defaults sync runtime restore-options save-options]]
+  (:require-macros [yank.logging :as d])
+  (:require [yank.shared :refer [defaults sync runtime restore-options save-options]]
             [goog.object :as gobj]
             [goog.events :as events]
             [goog.dom :as dom]))

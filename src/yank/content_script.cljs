@@ -3,7 +3,7 @@
             [shared.options :refer [defaults fetch-options on-storage-change]]
             [js.mousetrap]
             [clojure.string :as string])
-  (:require-macros [shared.logging :as d]))
+  (:require-macros [yank.logging :as d]))
 
 ;; for extern inference. Better warnings
 (set! *warn-on-infer* true)
