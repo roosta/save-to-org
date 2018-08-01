@@ -17,5 +17,7 @@ resources/dev/css
 resources/release/css
 resources/**/*.html
 manifest.json
-out
+out/extension/out
+**/cljs-runtime
 .tern-port
+.shadow-cljs
