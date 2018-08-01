@@ -1,4 +1,4 @@
-(ns yank.popup
+(ns yank.browser-action
   (:require-macros [yank.logging :as d])
   (:require [yank.shared :refer [defaults sync runtime restore-options save-options]]
             [goog.object :as gobj]
@@ -21,9 +21,6 @@
   (let [value (gobj/getValueByKeys e "target" "value")]
     (swap! options assoc :action value)
     (save-options @options)))
-
-(defn fig-reload
-  [])
 
 (defn init
   []
