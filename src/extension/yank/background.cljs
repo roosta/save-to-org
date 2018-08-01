@@ -2,7 +2,7 @@
   (:require-macros [yank.logging :as d])
   (:require [goog.object :as gobj]
             [yank.shared :refer [fetch-options defaults on-storage-change]]
-            [yank.background.format :as format]))
+            [yank.format :as format]))
 
 ;; for extern inference. Better warnings
 (set! *warn-on-infer* true)
