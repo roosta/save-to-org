@@ -21,3 +21,4 @@ out/extension/out
 **/cljs-runtime
 .tern-port
 .shadow-cljs
+node_modules
