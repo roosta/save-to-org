@@ -2,7 +2,7 @@
  :version "1.0.1"
  :description "Yank current page URL to clipboard as various markup formats"
  :manifest-version 2
- :homepage_url "https://github.com/roosta/yank"
+ :homepage-url "https://github.com/roosta/yank"
  :permissions ["tabs"
                "clipboardWrite"
                "contextMenus"
@@ -11,9 +11,8 @@
  :applications {:gecko {:id "yank@roosta.sh"}}
  :background {:persistent true}
  :shadow/outputs
- {
-  ;; :browser-action
-  ;; {:init-fn demo.chrome.browser-action/init}
+ {:browser-action
+  {:init-fn yank.browser-action/init}
 
   ;; :content-script
   ;; {:init-fn demo.chrome.content/init
@@ -22,10 +21,12 @@
 
   :background {:init-fn yank.background/init}}
 
- ;; :browser-action
- ;; {:default-title "hello world"
- ;;  :default-icon "icon.png"
- ;;  :default-popup "browser-action.html"}
+ :browser-action
+ {:default-title "Yank format"
+  :default-icon {"16" "icon.svg"
+                 "32" "icon.svg"}
+  :browser-style true
+  :default-popup "browser-action.html"}
 
  :content-security-policy
  ["script-src 'self' 'unsafe-eval'; object-src 'self'"]}
