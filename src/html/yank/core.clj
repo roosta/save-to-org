@@ -21,7 +21,7 @@
   ([] [:head
        [:meta {:charset "utf-8"}]]))
 
-(defn popup-body
+(defn browser-action-body
   [dev?]
   (into
    [:body
@@ -37,23 +37,7 @@
      (for [f formats]
        [:option {:value (:value f)} (:text f)])]]
 
-   (if dev?
-     [(include-js "js/popup/goog/base.js")
-      (include-js "setup.js")
-      (include-js "js/popup/cljs_deps.js")
-      (include-js "popup.js")]
-     [(include-js "js/popup.js")])))
-
-(defn background-body
-  [dev?]
-  (into
-   [:body]
-   (if dev?
-     [(include-js "js/background/goog/base.js")
-      (include-js "setup.js")
-      (include-js "js/background/cljs_deps.js")
-      (include-js "background.js")]
-     [(include-js "js/background.js")])))
+     [(include-js "out/browser-action.js")]))
 
 (defn options-body
   [dev?]
@@ -81,13 +65,7 @@
        "Reset"]
       [:button {:type "submit"}
        "Save"]]]]
-
-   (if dev?
-     [(include-js "js/options/goog/base.js")
-      (include-js "setup.js")
-      (include-js "js/options/cljs_deps.js")
-      (include-js "options.js")]
-     [(include-js "js/options.js")])))
+     [(include-js "out/options.js")]))
 
 (defn options-html
   [dev? css-ext]
@@ -97,29 +75,20 @@
           :title "Yank extension options page"})
    (options-body dev?)))
 
-(defn popup-html
+(defn browser-action-html
   [dev? css-ext]
   (html5
-   (head {:component "popup"
+   (head {:component "browser-action"
           :css-ext css-ext})
-   (popup-body dev?)))
-
-(defn background-html
-  [dev?]
-  (html5
-   (head)
-   (background-body dev?)))
+   (browser-action-body dev?)))
 
 (defn -main
   [& args]
   (let [dev? (= (env :location) "dev")
         css-ext (env :css-ext)
-        options-path (str "resources/" (env :location) "/options.html")
-        popup-path (str "resources/" (env :location) "/popup.html")
-        background-path (str "resources/" (env :location) "/background.html")]
+        options-path (str "out/" (env :location) "/options.html")
+        browser-action-path (str "out/" (env :location) "/browser-action.html")]
     (spit options-path (options-html dev? css-ext))
     (println (str "Wrote: " options-path))
-    (spit popup-path (popup-html dev? css-ext))
-    (println (str "Wrote: " popup-path))
-    (spit background-path (background-html dev?))
-    (println (str "Wrote: " background-path))))
+    (spit browser-action-path (browser-action-html dev? css-ext))
+    (println (str "Wrote: " browser-action-path))))
