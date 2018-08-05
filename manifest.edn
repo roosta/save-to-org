@@ -9,6 +9,8 @@
                "storage"
                "<all_urls>"]
  :applications {:gecko {:id "yank@roosta.sh"}}
+ :icons {"48" "icon.svg"
+         "96" "icon.svg"}
  :options-ui {:browser-style true
               :page "options.html"
               :open-in-tab true}
