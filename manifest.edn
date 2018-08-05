@@ -11,13 +11,16 @@
  :applications {:gecko {:id "yank@roosta.sh"}}
  :background {:persistent true}
  :shadow/outputs
+
  {:browser-action
   {:init-fn yank.browser-action/init}
 
-  ;; :content-script
-  ;; {:init-fn demo.chrome.content/init
-  ;;  :chrome/options {:matches ["http://localhost:*/*"]
-  ;;                   :run-at "document_idle"}}
+  :content-script
+  {:init-fn yank.content-script/init
+   :chrome/options {:matches ["http://*/*"
+                              "https://*/*"]
+                    :run-at "document_end"
+                    :all_frames true}}
 
   :background {:init-fn yank.background/init}}
 
