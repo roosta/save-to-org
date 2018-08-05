@@ -17,8 +17,11 @@ resources/dev/css
 resources/release/css
 resources/**/*.html
 manifest.json
-out/extension/out
+out/dev/out
 **/cljs-runtime
 .tern-port
 .shadow-cljs
 node_modules
+.cpcache
+*.html
+*.css
