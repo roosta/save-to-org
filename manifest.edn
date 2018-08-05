@@ -9,6 +9,9 @@
                "storage"
                "<all_urls>"]
  :applications {:gecko {:id "yank@roosta.sh"}}
+ :options-ui {:browser-style true
+              :page "options.html"
+              :open-in-tab true}
  :background {:persistent true}
  :shadow/outputs
 
@@ -22,7 +25,11 @@
                     :run-at "document_end"
                     :all_frames true}}
 
-  :background {:init-fn yank.background/init}}
+  :options
+  {:init-fn yank.options/init}
+
+  :background
+  {:init-fn yank.background/init}}
 
  :browser-action
  {:default-title "Yank format"
