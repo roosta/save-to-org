@@ -20,6 +20,12 @@ On Macs, "Ctrl" is interpreted as "Command", so if you actually need "Ctrl", spe
 * Document markup languages
   - [[https://en.wikipedia.org/wiki/Comparison_of_document_markup_languages][Comparison of document markup languages]]
   - [[http://openalea.gforge.inria.fr/doc/openalea/doc/_build/html/source/sphinx/rest_syntax.html#internal-and-external-links][3.6.1. Restructured Text (reST) and Sphinx CheatSheet]]
+* shadow-cljs
+  - [[https://github.com/thheller/shadow-cljs/issues/279][:chrome-extension target support · Issue #279 · thheller/shadow-cljs]]
+  - [[https://github.com/thheller/shadow-cljs/blob/master/out/chrome-manifest.edn][shadow-cljs/chrome-manifest.edn at master · thheller/shadow-cljs]]
+  - [[https://github.com/thheller/shadow-cljs/blob/master/shadow-cljs.edn][shadow-cljs/shadow-cljs.edn at master · thheller/shadow-cljs]]
+  - [[https://github.com/thheller/shadow-cljs/tree/master/out/chrome-ext][shadow-cljs/out/chrome-ext at master · thheller/shadow-cljs]]
+  - https://github.com/thheller/shadow-cljs/blob/cb833fd344801fbfbcdb24772940007ef4cb8aed/shadow-cljs.edn#L159
 * Issues
 ** Promises
    https://github.com/google/closure-compiler/issues/692
