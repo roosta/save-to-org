@@ -2,8 +2,6 @@
   (:require  [cljs.test :as t :include-macros true]
              [yank.background.format :as format]))
 
-(set! *warn-on-infer* false)
-
 (t/deftest format-test
   (t/testing "Testing the various formatting options"
     (t/are [x y] (= x y)
