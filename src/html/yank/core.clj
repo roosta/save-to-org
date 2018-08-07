@@ -1,8 +1,7 @@
 (ns yank.core
   (:require [hiccup.page :refer [include-js include-css html5 doctype]]
             [environ.core :refer [env]]
-            [clojure.string :as str])
-  (:gen-class))
+            [clojure.string :as str]))
 
 (def formats [{:value "org" :text "Org-mode"}
               {:value "md" :text "Markdown"}
@@ -13,16 +12,16 @@
               {:value "latex" :text "LaTeX"}])
 
 (defn head
-  ([{:keys [component title css-ext]}]
+  ([{:keys [component title]}]
    [:head
     [:meta {:charset "utf-8"}]
     (when title [:title title])
-    (include-css (str "/css/" component css-ext))])
+    (include-css (str "/css/" component ".css"))])
   ([] [:head
        [:meta {:charset "utf-8"}]]))
 
 (defn browser-action-body
-  [dev?]
+  []
   (into
    [:body
 
@@ -40,7 +39,7 @@
      [(include-js "out/browser-action.js")]))
 
 (defn options-body
-  [dev?]
+  []
   (into
    [:body
     [:form {:id "options-form"}
@@ -68,27 +67,23 @@
      [(include-js "out/options.js")]))
 
 (defn options-html
-  [dev? css-ext]
+  []
   (html5
    (head {:component "options"
-          :css-ext css-ext
           :title "Yank extension options page"})
-   (options-body dev?)))
+   (options-body)))
 
 (defn browser-action-html
-  [dev? css-ext]
+  []
   (html5
-   (head {:component "browser-action"
-          :css-ext css-ext})
-   (browser-action-body dev?)))
+   (head {:component "browser-action"})
+   (browser-action-body)))
 
 (defn -main
   [& args]
-  (let [dev? (= (env :location) "dev")
-        css-ext (env :css-ext)
-        options-path (str "out/" (env :location) "/options.html")
-        browser-action-path (str "out/" (env :location) "/browser-action.html")]
-    (spit options-path (options-html dev? css-ext))
-    (println (str "Wrote: " options-path))
-    (spit browser-action-path (browser-action-html dev? css-ext))
-    (println (str "Wrote: " browser-action-path))))
+    (let [filename (str "out/" (if (env :release) "release" "dev") "/options.html")]
+      (spit filename (options-html))
+      (println (str "Wrote: " filename)))
+    (let [filename (str "out/" (if (env :release) "release" "dev") "/browser-action.html")]
+      (spit filename (browser-action-html))
+      (println (str "Wrote: " filename))))
