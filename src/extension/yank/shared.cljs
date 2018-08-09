@@ -1,7 +1,6 @@
 (ns yank.shared
   (:require-macros [yank.logging :as d])
-  (:require [goog.object :as gobj]
-            [clojure.walk :as w]))
+  (:require [clojure.walk :as w]))
 
 ;; define default if nothing is present in storage
 (def defaults {:action "org"
@@ -13,12 +12,12 @@
                          :ctrl? true
                          :composed "ctrl+y"}})
 
-(def ^js/browser sync (gobj/getValueByKeys js/browser "storage" "sync"))
-(def ^js/browser runtime (gobj/get js/browser "runtime"))
+(def sync (.. js/browser -storage -sync))
+(def runtime (.-runtime js/browser))
 
 (defn save-options
   "save options Takes either an event object and options map or only options"
-  ([^js/Event e opts]
+  ([e opts]
    (.set sync (clj->js {:yank opts}))
    (.preventDefault e))
   ([opts]
@@ -26,16 +25,16 @@
 
 (defn on-storage-change
   [ref resp]
-  (when-let [new (w/keywordize-keys (js->clj (gobj/getValueByKeys resp "yank" "newValue")))]
+  (when-let [new (w/keywordize-keys (js->clj (.. ^js resp -yank -newValue)))]
     (reset! ref new)))
 
 (defn restore-options
   "Get options map and reset state atom with fetched value"
   [ref]
-  (let [^js/Promise options-promise (.get sync "yank")]
+  (let [options-promise (.get sync "yank")]
     (.then options-promise
-           (fn [resp]
-             (if-let [result (w/keywordize-keys (js->clj (gobj/get resp "yank")))]
+           (fn [^js resp]
+             (if-let [result (w/keywordize-keys (js->clj (.-yank resp)))]
                (reset! ref result)
                (reset! ref defaults)))
            (fn [error]
@@ -45,13 +44,10 @@
 (defn fetch-options
   "Handle fetching options, takes an atom as a param"
   [ref]
-  (let [^js/browser
-        sync (gobj/getValueByKeys js/browser "storage" "sync")]
-    (-> ^js/browser
-        (.get sync "yank")
-        ^js/browser
-        (.then (fn [resp]
-                 (if-let [result (w/keywordize-keys (js->clj (gobj/get resp "yank")))]
+  (let [sync (.. js/browser -storage -sync)]
+    (-> (.get sync "yank")
+        (.then (fn [^js resp]
+                 (if-let [result (w/keywordize-keys (js->clj (.-yank resp)))]
                    (reset! ref result)))
                (fn [error]
                  (d/log "Failed to get options: " error))))))

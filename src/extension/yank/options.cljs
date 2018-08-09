@@ -1,6 +1,5 @@
 (ns yank.options
   (:require [goog.events :as events]
-            [goog.object :as gobj]
             [yank.shared :refer [defaults sync runtime restore-options save-options]]
             [clojure.string :as string]
             [goog.dom :as dom])
@@ -21,16 +20,16 @@
 
 (defn get-os
   []
-  (let [^js/Promise platform-info (.getPlatformInfo runtime)]
+  (let [platform-info (.getPlatformInfo runtime)]
     (.then platform-info
-           (fn [resp]
-             (reset! os (gobj/get resp "os")))
+           (fn [^js resp]
+             (reset! os (.-os resp)))
            (fn [error]
              (d/error "Failed to get os from runtime. Error: " error)))))
 
 (defn handle-keydown
   "handle valid keybinds and reset state atom"
-  [^js/Event e]
+  [e]
   (let [keycode (.-keyCode e)
         key (re-matches #"^[a-z1-9]" (string/lower-case (.fromCharCode js/String keycode)))
         alt? (.-altKey e)
@@ -60,12 +59,12 @@
 (defn input-sync
   "Keep input field up to date with options atom"
   [k r old new]
-  (gobj/set (:format-select elements) "value" (:action new))
-  (gobj/set (:keybind-input elements) "value" (-> new :keybind :composed)))
+  (set! (.-value (:format-select elements)) (:action new))
+  (set! (.-value (:keybind-input elements)) (-> new :keybind :composed)))
 
 (defn handle-reset
   "Reset value in state and input field"
-  [^js/Event e]
+  [e]
   (.preventDefault e)
   (reset! options defaults)
   (save-options defaults))
@@ -73,12 +72,12 @@
 (defn handle-format-change
   "set options :action field on <select> change"
   [e]
-  (let [value (gobj/getValueByKeys e "target" "value")]
+  (let [value (.. e -target -value)]
     (swap! options assoc :action value)))
 
 (defn fig-reload
   []
-  (let [runtime ^js/browser (gobj/get js/browser "runtime")]
+  (let [runtime (.-runtime js/browser)]
     (.reload runtime)))
 
 (defn init

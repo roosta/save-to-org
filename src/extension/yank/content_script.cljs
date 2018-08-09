@@ -1,6 +1,5 @@
 (ns yank.content-script
-  (:require [goog.object :as gobj]
-            [yank.shared :refer [defaults fetch-options on-storage-change]]
+  (:require [yank.shared :refer [defaults fetch-options on-storage-change]]
             ["mousetrap" :as mousetrap]
             [clojure.string :as string])
   (:require-macros [yank.logging :as d]))
@@ -11,7 +10,7 @@
   "Sends a message using browser runtime
   Gets handled in background script"
   [e]
-  (let [^js/browser runtime (gobj/get js/browser "runtime")]
+  (let [runtime (.-runtime js/browser)]
     (.sendMessage runtime #js {:action (:action @options)})))
 
 (defn watcher
@@ -27,5 +26,5 @@
   []
   (mousetrap/bind (-> defaults :keybind :composed) send-message)
   (fetch-options options)
-  (.addListener ^js/browser (gobj/getValueByKeys js/browser "storage" "onChanged") #(on-storage-change options %))
+  (.addListener (.. js/browser -storage -onChanged) #(on-storage-change options %))
   (add-watch options :options watcher))
