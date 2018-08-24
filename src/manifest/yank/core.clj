@@ -22,7 +22,6 @@
                 :page "options.html"
                 :open-in-tab true}
    :background {:persistent true}
-   :content-security-policy ["script-src 'self'"]
    :browser-action {:default-title "Yank format"
                     :default-icon {"16" "icon-light.svg"
                                    "32" "icon-light.svg"}
@@ -42,7 +41,7 @@
                         "manifest-release.edn"
                         "manifest-dev.edn"))
         manifest (if (env :release)
-                   manifest
-                   (update-in manifest [:content-security-policy 0] #(str % " 'unsafe-eval'; object-src 'self'")))]
+                   (assoc manifest :content-security-policy ["script-src 'self'; object-src 'self'"])
+                   (assoc manifest :content-security-policy ["script-src 'self 'unsafe-eval'; object-src 'self'"]))]
     (spit filename (pr-str manifest))
     (println (str "Wrote: " filename))))
