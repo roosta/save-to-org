@@ -29,3 +29,4 @@ node_modules
 out/*.edn
 resources/dev/out
 resources/manifest-dev.edn
+resources/manifest-release.edn
