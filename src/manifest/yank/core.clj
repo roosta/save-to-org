@@ -22,18 +22,18 @@
                 :page "options.html"
                 :open-in-tab true}
    :background {:persistent true}
-   :browser-action
-   {:default-title "Yank format"
-    :default-icon {"16" "icon-light.svg"
-                   "32" "icon-light.svg"}
-    :theme-icons [{:light "icon-light.svg"
-                   :dark "icon-dark.svg"
-                   :size 16}
-                  {:light "icon-light.svg"
-                   :dark "icon-dark.svg"
-                   :size 32}]
-    :browser-style true
-    :default-popup "browser-action.html"}})
+   :content-security-policy ["script-src 'self'"]
+   :browser-action {:default-title "Yank format"
+                    :default-icon {"16" "icon-light.svg"
+                                   "32" "icon-light.svg"}
+                    :theme-icons [{:light "icon-light.svg"
+                                   :dark "icon-dark.svg"
+                                   :size 16}
+                                  {:light "icon-light.svg"
+                                   :dark "icon-dark.svg"
+                                   :size 32}]
+                    :browser-style true
+                    :default-popup "browser-action.html"}})
 
 (defn -main
   [& args]
@@ -43,6 +43,6 @@
                         "manifest-dev.edn"))
         manifest (if (env :release)
                    manifest
-                   (assoc manifest :content-security-policy ["script-src 'self' 'unsafe-eval'; object-src 'self'"]))]
+                   (update-in manifest [:content-security-policy 0] #(str % " 'unsafe-eval'; object-src 'self'")))]
     (spit filename (pr-str manifest))
-    (println (str "Wrote " filename))))
+    (println (str "Wrote: " filename))))
