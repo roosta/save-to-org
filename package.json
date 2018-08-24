@@ -14,5 +14,8 @@
   "homepage": "https://github.com/roosta/yank#readme",
   "dependencies": {
     "mousetrap": "^1.6.2"
+  },
+  "devDependencies": {
+    "shadow-cljs": "^2.6.3"
   }
 }
