@@ -1,5 +1,10 @@
 {:source-paths ["src/extension"]
- :builds {:extension {:target :chrome-extension
-                      :manifest-file "manifest.edn"
-                      :compiler-options {:infer-externs :auto}
-                      :extension-dir "out/extension"}}}
+ :builds {:dev {:target :chrome-extension
+                :manifest-file "resources/manifest-dev.edn"
+                :compiler-options {:infer-externs :auto}
+                :extension-dir "resources/dev"}
+
+          :release {:target :chrome-extension
+                    :manifest-file "resources/manifest-release.edn"
+                    :compiler-options {:infer-externs :auto}
+                    :extension-dir "resources/release"}}}
