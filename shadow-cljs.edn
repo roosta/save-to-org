@@ -1,10 +1,23 @@
 {:source-paths ["src/extension"]
- :builds {:dev {:target :chrome-extension
-                :manifest-file "resources/manifest-dev.edn"
-                :compiler-options {:infer-externs :auto}
-                :extension-dir "resources/dev"}
+ :builds {:extension {:target :chrome-extension
+                      :manifest-file "resources/manifest-dev.edn"
+                      :outputs {:popup
+                                {:output-type :chrome/single-file
+                                 :init-fn yank.browser-action/init}
 
-          :release {:target :chrome-extension
-                    :manifest-file "resources/manifest-release.edn"
-                    :compiler-options {:infer-externs :auto}
-                    :extension-dir "resources/release"}}}
+                                :content-script
+                                {:init-fn yank.content-script/init
+                                 :chrome/options {:matches ["http://*/*"
+                                                            "https://*/*"]
+                                                  :run-at "document_end"
+                                                  :all_frames true}}
+
+                                :options
+                                {:init-fn yank.options/init}
+
+                                :background
+                                {:init-fn yank.background/init}}
+                      :compiler-options {:infer-externs :auto}
+                      :release {:extension-dir "resources/release"
+                                :manifest-file "resources/manifest-release.edn"}
+                      :extension-dir "resources/dev"}}}

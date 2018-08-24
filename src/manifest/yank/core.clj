@@ -22,25 +22,6 @@
                 :page "options.html"
                 :open-in-tab true}
    :background {:persistent true}
-   :shadow/outputs
-
-   {:popup
-    {:output-type :chrome/single-file
-     :init-fn 'yank.browser-action/init}
-
-    :content-script
-    {:init-fn 'yank.content-script/init
-     :chrome/options {:matches ["http://*/*"
-                                "https://*/*"]
-                      :run-at "document_end"
-                      :all_frames true}}
-
-    :options
-    {:init-fn 'yank.options/init}
-
-    :background
-    {:init-fn 'yank.background/init}}
-
    :browser-action
    {:default-title "Yank format"
     :default-icon {"16" "icon-light.svg"
