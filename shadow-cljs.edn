@@ -1,4 +1,5 @@
 {:source-paths ["src/extension"]
+ :deps {:aliases [:cljs]}
  :builds {:extension {:target :chrome-extension
                       :manifest-file "resources/manifest-dev.edn"
                       :outputs {:popup
