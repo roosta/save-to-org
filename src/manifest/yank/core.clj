@@ -1,8 +1,8 @@
 (ns yank.core
-  (:require [clojure.edn :as edn]
+  (:require [aero.core :refer (read-config)]
             [environ.core :refer [env]]))
 
-(def config (edn/read-string "config.edn"))
+(def config (read-config "config.edn"))
 
 (def manifest
   {:name "yank"
@@ -16,16 +16,17 @@
                  "storage"
                  "<all_urls>"]
    :applications {:gecko {:id "yank@roosta.sh"}}
-   :icons {"48" "icon.svg"
-           "96" "icon.svg"}
+   :icons {"48" "icon-dark.svg"
+           "96" "icon-dark.svg"}
    :options-ui {:browser-style true
                 :page "options.html"
                 :open-in-tab true}
    :background {:persistent true}
    :shadow/outputs
 
-   {:browser-action
-    {:init-fn 'yank.browser-action/init}
+   {:popup
+    {:output-type :chrome/single-file
+     :init-fn 'yank.browser-action/init}
 
     :content-script
     {:init-fn 'yank.content-script/init
@@ -42,17 +43,22 @@
 
    :browser-action
    {:default-title "Yank format"
-    :default-icon {"16" "icon.svg"
-                   "32" "icon.svg"}
+    :default-icon {"16" "icon-light.svg"
+                   "32" "icon-light.svg"}
+    :theme-icons [{:light "icon-light.svg"
+                   :dark "icon-dark.svg"
+                   :size 16}
+                  {:light "icon-light.svg"
+                   :dark "icon-dark.svg"
+                   :size 32}]
     :browser-style true
     :default-popup "browser-action.html"}})
 
 (defn -main
   [& args]
-  (let [filename (str "out/" (if (env :release)
-                               "manifest-release.edn"
-                               "manifest-dev.edn"))
+  (let [filename (str "out/manifest.edn" )
         manifest (if (env :release)
                    manifest
                    (assoc manifest :content-security-policy ["script-src 'self' 'unsafe-eval'; object-src 'self'"]))]
-    (spit filename (pr-str manifest))))
+    (spit filename (pr-str manifest))
+    (println (str "Wrote " filename))))
