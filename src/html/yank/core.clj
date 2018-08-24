@@ -81,9 +81,9 @@
 
 (defn -main
   [& args]
-    (let [filename (str "out/" (if (env :release) "release" "dev") "/options.html")]
+    (let [filename (str "resources/" (if (env :release) "release" "dev") "/options.html")]
       (spit filename (options-html))
       (println (str "Wrote: " filename)))
-    (let [filename (str "out/" (if (env :release) "release" "dev") "/browser-action.html")]
+    (let [filename (str "resources/" (if (env :release) "release" "dev") "/browser-action.html")]
       (spit filename (browser-action-html))
       (println (str "Wrote: " filename))))

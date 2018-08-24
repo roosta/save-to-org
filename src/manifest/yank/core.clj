@@ -56,7 +56,10 @@
 
 (defn -main
   [& args]
-  (let [filename (str "out/manifest.edn" )
+  (let [filename (str "resources/"
+                      (if (env :release)
+                        "manifest-release.edn"
+                        "manifest-dev.edn"))
         manifest (if (env :release)
                    manifest
                    (assoc manifest :content-security-policy ["script-src 'self' 'unsafe-eval'; object-src 'self'"]))]

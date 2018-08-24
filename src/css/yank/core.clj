@@ -47,12 +47,12 @@
 
 (defn -main
   [& args]
-  (let [filename (str "out/" (if (env :release) "release" "dev") "/css/options.css")]
+  (let [filename (str "resources/" (if (env :release) "release" "dev") "/css/options.css")]
     (io/make-parents filename)
     (spit filename (css {:pretty-print? (env :release)} options))
     (println (str "Wrote: " filename)))
 
-  (let [filename (str "out/" (if (env :release) "release" "dev") "/css/browser-action.css")]
+  (let [filename (str "resources/" (if (env :release) "release" "dev") "/css/browser-action.css")]
     (io/make-parents filename)
     (spit filename (css {:pretty-print? (env :release)} browser-action))
     (println (str "Wrote: " filename))))
