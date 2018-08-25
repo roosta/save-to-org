@@ -4,17 +4,14 @@
            [java.io IOException])
   (:require [clojure.test :as t :refer [deftest testing is use-fixtures]]
             [etaoin.keys :as k]
+            [aero.core :refer [read-config]]
             [etaoin.api :as e ]))
 
 (def project-version
-  (-> (System/getProperty "user.dir")
-      (str "/project.clj")
-      slurp
-      read-string
-      (nth 2)))
+  (-> (read-config "config.edn") :version))
 
 (def extension-file
-  (-> (System/getProperty "user.dir")
+  (-> ("user.dir" System/getProperty)
       (str "/releases/yank-" project-version ".xpi")))
 
 (def ^:dynamic
