@@ -44,10 +44,9 @@
 (defn fetch-options
   "Handle fetching options, takes an atom as a param"
   [ref]
-  (let [sync (.. js/browser -storage -sync)]
-    (-> (.get sync "yank")
-        (.then (fn [^js resp]
-                 (if-let [result (w/keywordize-keys (js->clj (.-yank resp)))]
-                   (reset! ref result)))
-               (fn [error]
-                 (d/log "Failed to get options: " error))))))
+  (-> (.get sync "yank")
+      (.then (fn [^js resp]
+               (if-let [result (w/keywordize-keys (js->clj (.-yank resp)))]
+                 (reset! ref result)))
+             (fn [error]
+               (d/log "Failed to get options: " error)))))
