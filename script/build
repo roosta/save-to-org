@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. || exit 1
+
+clj -A:html
+clj -A:manifest
+clj -A:css
