@@ -5,9 +5,6 @@
             [goog.dom :as dom])
   (:require-macros [yank.logging :as d]))
 
-;; for extern inference, better warnings
-(set! *warn-on-infer* true)
-
 (def options (atom defaults))
 
 ;; mac win android linux
