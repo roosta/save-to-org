@@ -31,10 +31,13 @@ script/clean
 
 npm install
 
+SHADOW=$ROOT/node_modules/.bin/shadow-cljs
+
 clj -A:html
 clj -A:manifest
 clj -A:css
-clj -A:cljs -m shadow.cljs.devtools.cli release extension
+$SHADOW release extension
+# clj -A:cljs -m shadow.cljs.devtools.cli release extension
 
 if [ -d "$PACKAGE_DIR" ] ; then
   rm -rf "$PACKAGE_DIR"
