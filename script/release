@@ -19,7 +19,7 @@ fi
 
 clj -A:html
 clj -A:manifest
-clj -A:css 
+clj -A:css
 clj -A:cljs -m shadow.cljs.devtools.cli release extension
 
 if [ -d "$PACKAGE_DIR" ] ; then
@@ -31,6 +31,6 @@ cp -Lr "$RELEASE_BUILD" "$PACKAGE_DIR" # this will copy actual files, not symlin
 echo "'$PACKAGE_DIR' prepared for packing"
 
 echo "Zipping files..."
-cd "$PACKAGE_DIR" && zip -r -FS "$RELEASES/yank-$VERSION.xpi" -- * && cd - || exit 1 
+cd "$PACKAGE_DIR" && zip -r -FS "$RELEASES/yank-$VERSION.xpi" -- * && cd - || exit 1
 rm -rf "$PACKAGE_DIR"
 echo "Package saved as: yank-$VERSION.xpi"
