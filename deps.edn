@@ -12,4 +12,5 @@
          :extra-paths ["src/css"]
          :main-opts ["-m" "yank.core"]}
   :integration-test {:extra-deps {etaoin {:mvn/version "0.2.8-SNAPSHOT"}}
-                     :extra-paths ["test/integration"]}}}
+                     :extra-paths ["test/integration"]
+                     :main-opts ["-m" "yank.runner"]}}}
