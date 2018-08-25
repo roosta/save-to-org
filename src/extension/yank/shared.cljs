@@ -24,8 +24,8 @@
    (.set sync (clj->js {:yank opts}))))
 
 (defn on-storage-change
-  [ref resp]
-  (when-let [new (w/keywordize-keys (js->clj (.. ^js resp -yank -newValue)))]
+  [ref ^js resp]
+  (when-let [new (w/keywordize-keys (js->clj (.. resp -yank -newValue)))]
     (reset! ref new)))
 
 (defn restore-options
