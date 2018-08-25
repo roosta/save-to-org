@@ -42,6 +42,6 @@
                         "manifest-dev.edn"))
         manifest (if (env :release)
                    (assoc manifest :content-security-policy ["script-src 'self'; object-src 'self'"])
-                   (assoc manifest :content-security-policy ["script-src 'self 'unsafe-eval'; object-src 'self'"]))]
+                   (assoc manifest :content-security-policy ["script-src 'self' 'unsafe-eval'; object-src 'self'"]))]
     (spit filename (pr-str manifest))
     (println (str "Wrote: " filename))))
