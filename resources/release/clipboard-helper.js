@@ -1,1 +1,1 @@
-../shared/js/clipboard-helper.js
+../dev/clipboard-helper.js
