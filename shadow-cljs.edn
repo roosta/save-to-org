@@ -1,23 +1,28 @@
 {:source-paths ["src/extension"]
- ;; :deps {:aliases [:cljs]}
  :builds {:extension {:target :chrome-extension
                       :manifest-file "resources/manifest-dev.edn"
-                      :outputs {:popup
-                                {:output-type :chrome/single-file
-                                 :init-fn yank.browser-action/init}
+                      :outputs {:require {:entries [yank.shared
+                                                    clojure.string
+                                                    goog.dom
+                                                    goog.events]}
 
-                                :content-script
-                                {:init-fn yank.content-script/init
-                                 :chrome/options {:matches ["http://*/*"
-                                                            "https://*/*"]
-                                                  :run-at "document_end"
-                                                  :all_frames true}}
+                                :popup {:output-type :chrome/single-file
+                                        :depends-on #{:require}
+                                        :init-fn yank.browser-action/init}
 
-                                :options
-                                {:init-fn yank.options/init}
+                                :content-script {:init-fn yank.content-script/init
+                                                 :depends-on #{:require}
+                                                 :chrome/options {:matches ["http://*/*"
+                                                                            "https://*/*"]
+                                                                  :run-at "document_end"
+                                                                  :all_frames true}}
 
-                                :background
-                                {:init-fn yank.background/init}}
+                                :options {:init-fn yank.options/init
+                                          :depends-on #{:require}}
+
+                                :background {:init-fn yank.background/init
+                                             :depends-on #{:require}}}
+
                       :compiler-options {:infer-externs :auto}
                       :release {:extension-dir "resources/release"
                                 :manifest-file "resources/manifest-release.edn"}
