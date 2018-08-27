@@ -29,6 +29,4 @@
                                 :manifest-file "resources/manifest-release.edn"}
                       :extension-dir "resources/dev"}
           :test {:target :node-test
-                 :output-to "out/node-tests.js"
-                 :autorun true
-                 }}}
+                 :output-to "out/node-tests.js"}}}
