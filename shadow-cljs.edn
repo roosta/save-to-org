@@ -17,7 +17,8 @@
                                                                   :run-at "document_end"
                                                                   :all_frames true}}
 
-                                :options {:init-fn yank.options/init
+                                :options {:output-type :chrome/single-file
+                                          :init-fn yank.options/init
                                           :depends-on #{:require}}
 
                                 :background {:init-fn yank.background/init
