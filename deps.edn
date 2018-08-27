@@ -12,6 +12,9 @@
   :css  {:extra-deps {garden {:mvn/version "1.3.5"}}
          :extra-paths ["src/css"]
          :main-opts ["-m" "yank.core"]}
-  :integration-test {:extra-deps {etaoin {:mvn/version "0.2.8-SNAPSHOT"}}
+  :integration-test {:extra-deps
+                     {etaoin {:mvn/version "0.2.8-SNAPSHOT"}
+                      lambdaisland/kaocha {:git/url "https://github.com/lambdaisland/kaocha.git"
+                                           :sha "b0a70dc267ac60f5f80267747b6b0ff90fc2b4f3"}}
                      :extra-paths ["test/integration"]
-                     :main-opts ["-m" "yank.runner"]}}}
+                     :main-opts ["-m" "kaocha.runner"]}}}
