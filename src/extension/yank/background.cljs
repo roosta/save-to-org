@@ -3,9 +3,6 @@
   (:require [yank.shared :refer [fetch-options defaults on-storage-change]]
             [yank.format :as format]))
 
-;; for extern inference. Better warnings
-(set! *warn-on-infer* true)
-
 (def tabs (.-tabs js/browser))
 (def runtime (.-runtime js/browser))
 (def context-menus (.-contextMenus js/browser))
@@ -17,6 +14,7 @@
   (.create context-menus (clj->js {:id "yank-link"
                                    :title "Yank link to clipboard"
                                    :contexts ["link"]})))
+
 (defn execute-script
   "Execute a script using js/browser.tabs
   'obj' param is a javascript object conforming to this:
