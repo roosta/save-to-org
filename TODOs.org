@@ -69,3 +69,4 @@ On Macs, "Ctrl" is interpreted as "Command", so if you actually need "Ctrl", spe
 * TODO Grab underlying html tables and format to org-mode
 ** [[https://github.com/plexus/tablizer][plexus/tablizer: Format HTML tables as text. Demo Clojure CLI tools.]]
 * TODO Generate clipboard-helper from clojurescript
+* TODO Update options ui when changing format in browser-action
