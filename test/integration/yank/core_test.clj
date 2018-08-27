@@ -11,7 +11,7 @@
   (-> (read-config "config.edn") :version))
 
 (def extension-file
-  (-> ("user.dir" System/getProperty)
+  (-> (System/getProperty "user.dir")
       (str "/releases/yank-" project-version ".xpi")))
 
 (def ^:dynamic
