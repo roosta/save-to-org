@@ -6,9 +6,9 @@
                                                     goog.dom
                                                     goog.events]}
 
-                                :popup {:output-type :chrome/single-file
-                                        :depends-on #{:require}
-                                        :init-fn yank.browser-action/init}
+                                :browser-action {:output-type :chrome/single-file
+                                                 :depends-on #{:require}
+                                                 :init-fn yank.browser-action/init}
 
                                 :content-script {:init-fn yank.content-script/init
                                                  :depends-on #{:require}

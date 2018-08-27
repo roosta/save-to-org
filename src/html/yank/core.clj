@@ -36,7 +36,7 @@
      (for [f formats]
        [:option {:value (:value f)} (:text f)])]]
 
-     [(include-js "out/popup.js")]))
+     [(include-js "out/browser-action.js")]))
 
 (defn options-body
   []
