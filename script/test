@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+export RELEASE=1
+cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. || exit 1
+ROOT=$(pwd)
+SHADOW="$ROOT/node_modules/.bin/shadow-cljs"
+
+
+hash node 2>/dev/null || { echo >&2 "Node not found.  Aborting."; exit 1; }
+
+"$ROOT"/script/release
+$SHADOW release test
+node "$ROOT/out/node-tests.js"
+clj -A:integration-test
