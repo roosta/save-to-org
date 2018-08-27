@@ -68,3 +68,4 @@ On Macs, "Ctrl" is interpreted as "Command", so if you actually need "Ctrl", spe
 ** [[https://stackoverflow.com/questions/48540523/firefox-pick-page-action-icon-for-dark-light-themes][firefox pick page action icon for dark / light themes - Stack Overflow]]
 * TODO Grab underlying html tables and format to org-mode
 ** [[https://github.com/plexus/tablizer][plexus/tablizer: Format HTML tables as text. Demo Clojure CLI tools.]]
+* TODO Generate clipboard-helper from clojurescript
