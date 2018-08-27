@@ -1,4 +1,4 @@
-{:source-paths ["src/extension"]
+{:source-paths ["src/extension" "test/extension"]
  :builds {:extension {:target :chrome-extension
                       :manifest-file "resources/manifest-dev.edn"
                       :outputs {:require {:entries [yank.shared
@@ -27,4 +27,8 @@
                       :compiler-options {:infer-externs :auto}
                       :release {:extension-dir "resources/release"
                                 :manifest-file "resources/manifest-release.edn"}
-                      :extension-dir "resources/dev"}}}
+                      :extension-dir "resources/dev"}
+          :test {:target :node-test
+                 :output-to "out/node-tests.js"
+                 :autorun true
+                 }}}

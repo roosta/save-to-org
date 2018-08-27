@@ -1,6 +1,6 @@
-(ns yank.core-test
+(ns yank.background-test
   (:require  [cljs.test :as t :include-macros true]
-             [yank.background.format :as format]))
+             [yank.format :as format]))
 
 (t/deftest format-test
   (t/testing "Testing the various formatting options"
