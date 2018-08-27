@@ -17,15 +17,8 @@ if ! git diff-index --quiet HEAD --; then
   exit 1
 fi
 
-hash clj 2>/dev/null || {
-  echo >&2 "Clojure not found.  Aborting."
-  exit 1
-}
-
-hash npm 2>/dev/null || {
-  echo >&2 "NPM not found.  Aborting."
-  exit 1
-}
+hash clj 2>/dev/null || { echo >&2 "Clojure not found.  Aborting."; exit 1; }
+hash npm 2>/dev/null || { echo >&2 "NPM not found.  Aborting."; exit 1; }
 
 script/clean
 
