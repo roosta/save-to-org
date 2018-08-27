@@ -5,13 +5,20 @@ before_install:
   - mkdir geckodriver
   - tar -xzf geckodriver-v0.21.0-linux64.tar.gz -C geckodriver
   - export PATH=$PATH:$PWD/geckodriver
+  - sudo apt-get update -qq
+  - sudo apt-get install nodejs npm -y
+  - curl -O https://download.clojure.org/install/linux-install-1.9.0.391.sh
+  - chmod +x linux-install-1.9.0.391.sh
+  - sudo ./linux-install-1.9.0.391.sh
 
 addons:
   firefox: latest
 
+install:
+  - clojure -Sdescribe
+  - npm install
+
 script:
-  - lein manifest-test
-  - lein html-test
-  - lein background-test
-  - lein release
-  - xvfb-run --server-args="-screen 0 1024x768x24" lein integration-test
+  - script/unit-tests
+  - script/release
+  - xvfb-run --server-args="-screen 0 1024x768x24" clj -A:integration-test
