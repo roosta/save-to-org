@@ -12,10 +12,10 @@ RELEASE_BUILD="$ROOT/resources/release"
 VERSION=$(cut -d'"' -f2 < "$ROOT/config.edn")
 PACKAGE_DIR="$RELEASES/yank-$VERSION"
 
-if ! git diff-index --quiet HEAD --; then
-  echo >&2 'There are uncommitted changes, Aborting.'
-  exit 1
-fi
+# if ! git diff-index --quiet HEAD --; then
+#   echo >&2 'There are uncommitted changes, Aborting.'
+#   exit 1
+# fi
 
 hash clj 2>/dev/null || { echo >&2 "Clojure not found.  Aborting."; exit 1; }
 hash npm 2>/dev/null || { echo >&2 "NPM not found.  Aborting."; exit 1; }
