@@ -21,4 +21,4 @@ install:
 script:
   - script/unit-tests
   - script/release
-  - xvfb-run --server-args="-screen 0 1024x768x24" clj -A:integration-test
+  - xvfb-run --server-args="-screen 0 1024x768x24" clojure -A:integration-test
