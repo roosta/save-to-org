@@ -1,6 +1,6 @@
 (ns yank.options
   (:require [goog.events :as events]
-            [yank.shared :refer [defaults sync runtime restore-options save-options]]
+            [yank.shared :refer [defaults sync runtime restore-options save-options on-storage-change]]
             [clojure.string :as string]
             [goog.dom :as dom])
   (:require-macros [yank.logging :as d]))
@@ -82,6 +82,7 @@
   (add-watch options :input-sync input-sync)
   (restore-options options)
   (get-os)
+  (.addListener (.. js/browser -storage -onChanged) #(on-storage-change options %))
   (events/listen (:keybind-input elements) "keydown" handle-keydown)
   (events/listen (:format-select elements) "change" handle-format-change)
   (events/listen (:form elements) "reset" handle-reset)
