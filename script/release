@@ -12,6 +12,10 @@ RELEASE_BUILD="$ROOT/resources/release"
 VERSION=$(cut -d'"' -f2 < "$ROOT/config.edn")
 PACKAGE_DIR="$RELEASES/yank-$VERSION"
 
+if [ ! -d "$RELEASES" ] ; then
+  mkdir -p "$RELEASES"
+fi
+
 # if ! git diff-index --quiet HEAD --; then
 #   echo >&2 'There are uncommitted changes, Aborting.'
 #   exit 1
