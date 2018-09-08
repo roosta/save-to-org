@@ -1,0 +1,8 @@
+^{:watch-dirs ["src/background"]}
+{:main yank.background
+ :asset-path    "js/background"
+ :output-to     "resources/dev/js/background/main.js"
+ :output-dir    "resources/dev/js/background"
+ :infer-externs true
+ :source-map true
+ :optimizations :none}
