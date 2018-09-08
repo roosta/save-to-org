@@ -50,8 +50,9 @@
    [:body]
    (if dev?
      [(include-js "js/background/goog/base.js")
-      (include-js "setup.js")
+      (include-js "js/background/goog/deps.js")
       (include-js "js/background/cljs_deps.js")
+      (include-js "setup.js")
       (include-js "background.js")]
      [(include-js "js/background.js")])))
 
