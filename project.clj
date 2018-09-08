@@ -105,10 +105,6 @@
                      :compiler {:output-to "resources/dev/css/options.css"
                                 :pretty-print? true}}]}
 
-  :figwheel {:server-port 6888
-             :css-dirs ["resources/dev/css"]
-             :repl        true}
-
   :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.1.9"]
                                   [hickory "0.7.1"]
                                   [cider/piggieback "0.3.9"]]
