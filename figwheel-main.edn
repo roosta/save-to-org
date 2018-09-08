@@ -1,4 +1,3 @@
-{:watch-dirs ["src" "admin-src"]
- :open-file-command "emacs-file-opener"
- :open-url false
- :css-dirs ["resources/public/css"]}
+{:open-file-command "emacs-file-opener"
+ :cljs-devtools false
+ :open-url false}
