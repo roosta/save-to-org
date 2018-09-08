@@ -21,7 +21,7 @@
                                     "resources/release/manifest.json"
                                     "resources/dev/manifest.json"]
 
-  :source-paths ["src/lib"]
+  :source-paths ["src/lib" "src/background"]
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-asset-minifier "0.4.4"]
@@ -106,8 +106,11 @@
                                 :pretty-print? true}}]}
 
   :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.1.9"]
+                                  [com.bhauman/rebel-readline-cljs "0.1.4"]
                                   [hickory "0.7.1"]
                                   [cider/piggieback "0.3.9"]]
+
+                   :resource-paths ["target"]
 
                    :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
 
