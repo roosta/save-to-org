@@ -1,0 +1,17 @@
+^{:watch-dirs ["src/extension"]}
+{:asset-path    "/out"
+ :output-dir    "resources/dev/out"
+ :infer-externs true
+ :foreign-libs  [{:file     "src/js/mousetrap.js"
+                  :file-min "src/js/mousetrap.min.js"
+                  :provides ["js.mousetrap"]}]
+ :source-map true
+ :optimizations :none
+ :modules {:background     {:entries #{yank.background}
+                            :output-to "out/background.js"}
+           :options        {:entries #{yank.options}
+                            :output-to "out/options.js"}
+           :content-script {:entries #{yank.content-script}
+                            :output-to "out/content-script.js"}
+           :browser-action {:entries #{yank.browser-action}
+                            :output-to "out/browser-action.js"}}}
