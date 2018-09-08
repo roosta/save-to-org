@@ -91,7 +91,7 @@
                         ["doo" "phantom" "background-test" "once"]
                         ["with-profile" "+integration-test" "test"]]
 
-            "fig"      ["figwheel" "background" "options" "popup"]}
+            "fig" ["trampoline" "run" "-m" "figwheel.main"]}
 
   :garden {:builds [{:id "popup"
                      :source-paths ["src/styles/popup"]
