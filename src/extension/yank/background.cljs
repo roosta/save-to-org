@@ -82,7 +82,7 @@
 (defn start
   []
   (create-context-menu)
-  (fetch-options)
+  (fetch-options options)
   (.addListener ^js/browser (gobj/getValueByKeys js/browser "storage" "onChanged") #(on-storage-change options %))
   (.addListener ^js/browser (gobj/getValueByKeys js/browser "browserAction" "onClicked") handle-click)
   (.addListener ^js/browser (gobj/getValueByKeys js/browser "contextMenus" "onClicked") handle-context)
