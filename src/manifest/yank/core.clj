@@ -34,7 +34,8 @@
 
                :content_scripts [{:matches ["http://*/*"
                                             "https://*/*"]
-                                  :js ["js/content_script.js"]
+                                  :js ["js/cljs_base.js"
+                                       "js/content-script.js"]
                                   :all_frames true
                                   :run_at "document_end"}]
 
@@ -52,11 +53,11 @@
 
                :applications {:gecko {:id "yank@roosta.sh"}}
 
-               :background {:page "background.html"}})
+               :background {:scripts ["js/cljs_base.js"
+                                      "js/background.js"]}})
 
 (def manifest-dev (-> manifest
-                      (assoc  :content_security_policy "script-src 'self' 'unsafe-eval'; object-src 'self'")
-                      (assoc-in [:content_scripts 0 :js] ["js/content_script/main.js"])))
+                      (assoc  :content_security_policy "script-src 'self' 'unsafe-eval'; object-src 'self'")))
 
 (defn compile-json
   [{:keys [escape-slash dev?]}]
