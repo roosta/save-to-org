@@ -1,8 +1,7 @@
 (ns yank.core
   (:require [hiccup.page :refer [include-js include-css html5 doctype]]
             [environ.core :refer [env]]
-            [clojure.string :as str])
-  (:gen-class))
+            [clojure.string :as str]))
 
 (def formats [{:value "org" :text "Org-mode"}
               {:value "md" :text "Markdown"}
@@ -13,16 +12,16 @@
               {:value "latex" :text "LaTeX"}])
 
 (defn head
-  ([{:keys [component title css-ext]}]
+  ([{:keys [component title]}]
    [:head
     [:meta {:charset "utf-8"}]
     (when title [:title title])
-    (include-css (str "/css/" component css-ext))])
+    (include-css (str "/css/" component ".css"))])
   ([] [:head
        [:meta {:charset "utf-8"}]]))
 
-(defn popup-body
-  [dev?]
+(defn browser-action-body
+  []
   (into
    [:body
 
@@ -37,27 +36,11 @@
      (for [f formats]
        [:option {:value (:value f)} (:text f)])]]
 
-   (if dev?
-     [(include-js "js/popup/goog/base.js")
-      (include-js "setup.js")
-      (include-js "js/popup/cljs_deps.js")
-      (include-js "popup.js")]
-     [(include-js "js/popup.js")])))
-
-(defn background-body
-  [dev?]
-  (into
-   [:body]
-   (if dev?
-     [(include-js "js/background/goog/base.js")
-      (include-js "js/background/goog/deps.js")
-      (include-js "js/background/cljs_deps.js")
-      (include-js "setup.js")
-      (include-js "background.js")]
-     [(include-js "js/background.js")])))
+   [(include-js "js/cljs_base.js")
+    (include-js "js/browser-action.js")]))
 
 (defn options-body
-  [dev?]
+  []
   (into
    [:body
     [:form {:id "options-form"}
@@ -82,45 +65,27 @@
        "Reset"]
       [:button {:type "submit"}
        "Save"]]]]
-
-   (if dev?
-     [(include-js "js/options/goog/base.js")
-      (include-js "setup.js")
-      (include-js "js/options/cljs_deps.js")
-      (include-js "options.js")]
-     [(include-js "js/options.js")])))
+   [(include-js "js/cljs_base.js")
+    (include-js "js/options.js")]))
 
 (defn options-html
-  [dev? css-ext]
+  []
   (html5
    (head {:component "options"
-          :css-ext css-ext
           :title "Yank extension options page"})
-   (options-body dev?)))
+   (options-body)))
 
-(defn popup-html
-  [dev? css-ext]
+(defn browser-action-html
+  []
   (html5
-   (head {:component "popup"
-          :css-ext css-ext})
-   (popup-body dev?)))
-
-(defn background-html
-  [dev?]
-  (html5
-   (head)
-   (background-body dev?)))
+   (head {:component "browser-action"})
+   (browser-action-body)))
 
 (defn -main
   [& args]
-  (let [dev? (= (env :location) "dev")
-        css-ext (env :css-ext)
-        options-path (str "resources/" (env :location) "/options.html")
-        popup-path (str "resources/" (env :location) "/popup.html")
-        background-path (str "resources/" (env :location) "/background.html")]
-    (spit options-path (options-html dev? css-ext))
-    (println (str "Wrote: " options-path))
-    (spit popup-path (popup-html dev? css-ext))
-    (println (str "Wrote: " popup-path))
-    (spit background-path (background-html dev?))
-    (println (str "Wrote: " background-path))))
+    (let [filename (str "resources/" (if (env :release) "release" "dev") "/options.html")]
+      (spit filename (options-html))
+      (println (str "Wrote: " filename)))
+    (let [filename (str "resources/" (if (env :release) "release" "dev") "/browser-action.html")]
+      (spit filename (browser-action-html))
+      (println (str "Wrote: " filename))))
